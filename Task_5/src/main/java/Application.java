@@ -10,6 +10,7 @@ public class Application {
     Graph graph = new Graph(statisticCharacters.getRelativeFrequency(), statisticCharacters.getData().length);
     graph.drawFunction();
     graph.drawPolygonOfFrequencies();
+    graph.drawBarGraph();
     graph.showGraph();
   }
 }

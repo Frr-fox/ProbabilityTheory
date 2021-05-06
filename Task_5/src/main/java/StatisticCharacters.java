@@ -1,11 +1,9 @@
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class StatisticCharacters {
     @Getter
@@ -35,7 +33,7 @@ public class StatisticCharacters {
                 relativeFrequency.put(number, ++newCount);
             }
         }
-        relativeFrequency.replaceAll((k, v) -> v / data.length);
+//        relativeFrequency.replaceAll((k, v) -> v / data.length);
     }
 
     private Double calculateMinValue() {
@@ -66,8 +64,30 @@ public class StatisticCharacters {
         for (Double number :data) {
             sum += pow((number - averageOfDistribution), 2);
         }
-        meanSquareDeviation = sum / data.length;
+        meanSquareDeviation = sqrt(sum / data.length);
         return meanSquareDeviation;
+    }
+
+    private ArrayList<Double> getYFunction() {
+        ArrayList<Double> data_Y = new ArrayList<>(), dataY = new ArrayList<>();
+        relativeFrequency.forEach((number, frequency) -> {
+            data_Y.add(frequency / data.length);
+        });
+        double sum = 0;
+        for (Double aDouble : data_Y) {
+            sum += aDouble;
+            dataY.add(sum);
+        }
+        dataY.add(1.0);
+        return dataY;
+    }
+
+    private ArrayList<Double> getXFunction() {
+        ArrayList<Double> dataX = new ArrayList<>();
+        relativeFrequency.forEach((number, frequency) -> {
+            dataX.add(number);
+        });
+        return dataX;
     }
 
     public void printCharacteristics() {
@@ -88,6 +108,13 @@ public class StatisticCharacters {
                 .replace(",", "."));
         System.out.println(String.format("Среднеквадратическое отклонение: %.3f", calculateMeanSquareDeviation())
                 .replace(",", "."));
+        System.out.println("\nЭмпирическая функция");
+        ArrayList<Double> dataX = getXFunction(), dataY = getYFunction();
+        System.out.printf("F(x) = 0 при x <= %.2f \n", dataX.get(0));
+        for (int i = 0; i < dataX.size() - 1; i++) {
+            System.out.printf("F(x) = %.3f при x = (%.2f; %.2f] \n", dataY.get(i), dataX.get(i), dataX.get(i + 1));
+        }
+        System.out.printf("F(x) = %.2f при x > %.2f \n", dataY.get(dataY.size() - 1), dataX.get(dataX.size() - 1));
     }
 
     private Double[] sort(Double[] result) {

@@ -2,8 +2,8 @@ import lombok.Getter;
 
 import java.util.*;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
+import static java.lang.Math.log;
 
 public class StatisticCharacters {
     @Getter
@@ -90,6 +90,10 @@ public class StatisticCharacters {
         return dataX;
     }
 
+    public double calculateStep() {
+        return (maxValue - minValue) /  (1 + log(data.length)/log(2));
+    }
+
     public void printCharacteristics() {
         System.out.println("Исходный ряд: ");
         for (Double number : data) {
@@ -115,6 +119,7 @@ public class StatisticCharacters {
             System.out.printf("F(x) = %.3f при x = (%.2f; %.2f] \n", dataY.get(i), dataX.get(i), dataX.get(i + 1));
         }
         System.out.printf("F(x) = %.2f при x > %.2f \n", dataY.get(dataY.size() - 1), dataX.get(dataX.size() - 1));
+        System.out.printf("\nИнтервальный шаг %.3f\n", calculateStep());
     }
 
     private Double[] sort(Double[] result) {

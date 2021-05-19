@@ -1,6 +1,5 @@
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
-import org.knowm.xchart.style.markers.BaseSeriesMarkers;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.awt.*;
@@ -24,8 +23,6 @@ public class Graph {
         this.chartPolygon = new XYChartBuilder().width(650).height(350).title("Полигон частот")
                 .xAxisTitle("X").yAxisTitle("n*").build();
         chartPolygon.getStyler().setLegendPosition(Styler.LegendPosition.InsideNE);
-//        this.histogram = new CategoryChartBuilder().width(750).height(550).title("Гистограмма частот")
-//                .xAxisTitle("X").yAxisTitle("n/h").build();
         this.histogram = new XYChartBuilder().width(650).height(350).title("Гистограмма частот")
                 .xAxisTitle("X").yAxisTitle("n/h").build();
         this.relativeFrequency = relativeFrequency;

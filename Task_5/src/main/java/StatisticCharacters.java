@@ -90,7 +90,7 @@ public class StatisticCharacters {
         return dataX;
     }
 
-    public double calculateStep() {
+    private double calculateStep() {
         return (maxValue - minValue) /  (1 + log(data.length)/log(2));
     }
 

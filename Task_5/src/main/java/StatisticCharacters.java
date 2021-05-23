@@ -114,11 +114,11 @@ public class StatisticCharacters {
                 .replace(",", "."));
         System.out.println("\nЭмпирическая функция");
         ArrayList<Double> dataX = getXFunction(), dataY = getYFunction();
-        System.out.printf("F(x) = 0 при x <= %.2f \n", dataX.get(0));
+        System.out.printf("F(x) = 0 при x < %.2f \n", dataX.get(0));
         for (int i = 0; i < dataX.size() - 1; i++) {
-            System.out.printf("F(x) = %.3f при x = (%.2f; %.2f] \n", dataY.get(i), dataX.get(i), dataX.get(i + 1));
+            System.out.printf("F(x) = %.3f при x = [%.2f; %.2f) \n", dataY.get(i), dataX.get(i), dataX.get(i + 1));
         }
-        System.out.printf("F(x) = %.2f при x > %.2f \n", dataY.get(dataY.size() - 1), dataX.get(dataX.size() - 1));
+        System.out.printf("F(x) = %.2f при x >= %.2f \n", dataY.get(dataY.size() - 1), dataX.get(dataX.size() - 1));
         System.out.printf("\nИнтервальный шаг %.3f\n", calculateStep());
     }
 
